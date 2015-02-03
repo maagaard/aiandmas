@@ -81,33 +81,33 @@ public abstract class Strategy {
 	}
 
 	public static class StrategyDFS extends Strategy {
+
+		private ArrayDeque< Node > frontier;
+
 		public StrategyDFS() {
 			super();
-			// Unimplemented			
+			frontier = new ArrayDeque<Node>();
 		}
 
 		public Node getAndRemoveLeaf() {
-			// Unimplemented
-			return null;
+			return frontier.pop();
 		}
 
 		public void addToFrontier( Node n ) {
-			// Unimplemented
+			frontier.push(n);
+
 		}
 
 		public int countFrontier() {
-			// Unimplemented
-			return 0;
+			return frontier.size();
 		}
 
 		public boolean frontierIsEmpty() {
-			// Unimplemented
-			return true;
+			return frontier.isEmpty();
 		}
 
 		public boolean inFrontier( Node n ) {
-			// Unimplemented
-			return false;
+			return frontier.contains(n);
 		}
 
 		public String toString() {
