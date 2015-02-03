@@ -12,8 +12,8 @@ import sc.Command.type;
 public class Node {
 
 	private static Random rnd = new Random( 1 ); 
-	public static int MAX_ROW = 70;
-	public static int MAX_COLUMN = 70;
+	public static int MAX_ROW = 25;
+	public static int MAX_COLUMN = 25;
 
 	public int agentRow;
 	public int agentCol;
@@ -38,6 +38,16 @@ public class Node {
 	private int g;
 
 	public Node( Node parent ) {
+		this.parent = parent;
+		if ( parent == null ) {
+			g = 0;
+		} else {
+			g = parent.g() + 1;
+		}
+	}
+
+	public Node(Node parent, int max_rows, int max_columns) {
+
 		this.parent = parent;
 		if ( parent == null ) {
 			g = 0;
@@ -138,13 +148,13 @@ public class Node {
 	}
 
 	private Node ChildNode() {
-		Node copy = new Node( this );
-		for ( int row = 0; row < MAX_ROW; row++ ) {
-			System.arraycopy( this.walls[row], 0, copy.walls[row], 0, MAX_COLUMN );
-			System.arraycopy( this.boxes[row], 0, copy.boxes[row], 0, MAX_COLUMN );
-			System.arraycopy( this.goals[row], 0, copy.goals[row], 0, MAX_COLUMN );
-		}
-		return copy;
+		// Node copy = new Node( this );
+		// for ( int row = 0; row < MAX_ROW; row++ ) {
+		// 	System.arraycopy( this.walls[row], 0, copy.walls[row], 0, MAX_COLUMN );
+		// 	System.arraycopy( this.boxes[row], 0, copy.boxes[row], 0, MAX_COLUMN );
+		// 	System.arraycopy( this.goals[row], 0, copy.goals[row], 0, MAX_COLUMN );
+		// }
+		return this;//copy;
 	}
 
 	public LinkedList< Node > extractPlan() {
