@@ -1,0 +1,57 @@
+
+AI & MAS
+
+Assignment 1
+
+
+
+Exercise 1 - Search strategies:
+
+
+a) 
+Benchmark:
+<From Client> Summary for Breadth-first Search
+<From Client> Found solution of length 19
+<From Client> #Explored:   78, #Frontier:   2, Time: 0.07 s     [Used: 11.52 MB, Free: 233.98 MB, Alloc: 245.50 MB, MaxAlloc: 3641.00 MB]
+success
+
+
+b) 
+Benchmark:
+<From Client> Summary for Breadth-first Search
+<From Client> #Explored: 147800, #Frontier: 57021, Time: 299.93 s   [Used: 6244.04 MB, Free: 1037.96 MB, Alloc: 7282.00 MB, MaxAlloc: 7282.00 MB]
+<From Client> Time limit reached, terminating search [Used: 6244.04 MB, Free: 1037.96 MB, Alloc: 7282.00 MB, MaxAlloc: 7282.00 MB]
+<From Client> Unable to solve level
+
+Explanation:
+It can seem like there are many more solutions, because of the now 4 A's, and not just one. However, only one of the A's can be pushed into the goal due to the ``Sobako ??????'' rule.
+- So even with 8GB of RAM allocated it is not possible. 
+
+Quite a few nodes have been explored.
+
+
+
+c)
+
+
+Benchmark:
+
+SAD1
+<From Client> Search starting with strategy Depth-first Search
+<From Client> #Explored:    0, #Frontier:   0, Time: 0.02 s     [Used: 5.12 MB, Free: 240.38 MB, Alloc: 245.50 MB, MaxAlloc: 3641.00 MB]
+<From Client> Unable to solve level
+
+SAD2
+<From Client> Search starting with strategy Depth-first Search
+<From Client> #Explored:    0, #Frontier:   0, Time: 0.03 s     [Used: 5.12 MB, Free: 240.38 MB, Alloc: 245.50 MB, MaxAlloc: 7282.00 MB]
+<From Client> Unable to solve level
+
+
+
+
+
+
+
+
+
+
