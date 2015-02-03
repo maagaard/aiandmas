@@ -32,23 +32,47 @@ Quite a few nodes have been explored.
 
 
 c)
-
-
+Implementing StrategyDFS using the same ArrayDeque - but now 
 Benchmark:
 
 SAD1
-<From Client> Search starting with strategy Depth-first Search
-<From Client> #Explored:    0, #Frontier:   0, Time: 0.02 s     [Used: 5.12 MB, Free: 240.38 MB, Alloc: 245.50 MB, MaxAlloc: 3641.00 MB]
-<From Client> Unable to solve level
+<From Client> Summary for Depth-first Search
+<From Client> Found solution of length 27
+<From Client> #Explored:   44, #Frontier:  22, Time: 0.05 s     [Used: 8.96 MB, Free: 236.54 MB, Alloc: 245.50 MB, MaxAlloc: 3641.00 MB]
+success
 
 SAD2
-<From Client> Search starting with strategy Depth-first Search
-<From Client> #Explored:    0, #Frontier:   0, Time: 0.03 s     [Used: 5.12 MB, Free: 240.38 MB, Alloc: 245.50 MB, MaxAlloc: 7282.00 MB]
+<From Client> Summary for Depth-first Search
+<From Client> Found solution of length 5781
+<From Client> #Explored: 6799, #Frontier: 13263, Time: 4.57 s   [Used: 599.20 MB, Free: 395.80 MB, Alloc: 995.00 MB, MaxAlloc: 7282.00 MB]
+success
+
+
+
+d) 
+
+Benchmark - custom:
+
+<From Client> Summary for Depth-first Search
+<From Client> Found solution of length 45
+<From Client> #Explored:   60, #Frontier: 106, Time: 0.06 s     [Used: 11.52 MB, Free: 233.98 MB, Alloc: 245.50 MB, MaxAlloc: 7282.00 MB]
+success
+
+<From Client> Search starting with strategy Breadth-first Search
+<From Client> #Explored: 172400, #Frontier: 49692, Time: 299.59 s   [Used: 6292.14 MB, Free: 989.86 MB, Alloc: 7282.00 MB, MaxAlloc: 7282.00 MB]
+<From Client> Time limit reached, terminating search [Used: 6316.39 MB, Free: 965.61 MB, Alloc: 7282.00 MB, MaxAlloc: 7282.00 MB]
 <From Client> Unable to solve level
 
+Level:
+The custom designed level is a derivation of SAD2, where some of the possible spaces are filled to limit the possible movements. The possible A's are also moved a little bit. 
 
 
 
+
+Exercise 2 - Optimizations
+
+
+a) 
 
 
 
