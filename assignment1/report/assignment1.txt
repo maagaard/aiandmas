@@ -74,6 +74,25 @@ Exercise 2 - Optimizations
 
 a) 
 
+1) ????
+2) The number of columns are used when instantiating the node
+Benchmark:
+
+b) "The locations of boxes in a level are not static. Explain which data structure would allow you to save memory in most levels, while still offering good performance when it comes to lookup. In terms of running time, what would the impact of such a modification be on isGoalState() and getExpandedNodes()"
+
+???
+
+
+
+Exercise 3 - Heuristics
+
+
+a) "Write a best-first search client by implementing the StrategyBestFirst class. The Heuristic argument in the constructor must be used to order nodes. As it implements the Comparator<Node> interface it integrates well with the Java Collections library. Make sure you use an appropriate data structure for the frontier, and state which one you have used."
+
+
+
+
+
 
 
 

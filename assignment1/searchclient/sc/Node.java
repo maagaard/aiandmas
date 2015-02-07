@@ -6,14 +6,15 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Random;
 
+//import sc.Command;
 import sc.Command.dir;
 import sc.Command.type;
 
 public class Node {
 
 	private static Random rnd = new Random( 1 ); 
-	public static int MAX_ROW = 25;
-	public static int MAX_COLUMN = 25;
+//	public static int MAX_ROW = 25;
+//	public static int MAX_COLUMN = 25;
 
 	public int agentRow;
 	public int agentCol;
@@ -28,25 +29,35 @@ public class Node {
 	// walls[row][col] is true if there's a wall at (row, col)
 	//
 
-	public boolean[][] walls = new boolean[MAX_ROW][MAX_COLUMN];
-	public char[][] boxes = new char[MAX_ROW][MAX_COLUMN]; 
-	public char[][] goals = new char[MAX_ROW][MAX_COLUMN];
+	public boolean[][] walls; // = new boolean[MAX_ROW][MAX_COLUMN];
+	public char[][] boxes;// = new char[MAX_ROW][MAX_COLUMN];
+	public char[][] goals;//; = new char[MAX_ROW][MAX_COLUMN];
 
 	public Node parent;
 	public Command action;
 
 	private int g;
 
-	public Node( Node parent ) {
-		this.parent = parent;
-		if ( parent == null ) {
-			g = 0;
-		} else {
-			g = parent.g() + 1;
-		}
-	}
+	private int rows;
+	private int columns;
 
-	public Node(Node parent, int max_rows, int max_columns) {
+	// public Node( Node parent ) {
+	// 	this.parent = parent;
+	// 	if ( parent == null ) {
+	// 		g = 0;
+	// 	} else {
+	// 		g = parent.g() + 1;
+	// 	}
+	// }
+
+	public Node(Node parent, int rows, int columns) {
+
+		this.rows = rows;
+		this.columns = columns;
+
+        walls = new boolean[rows][columns];
+		boxes = new char[rows][columns];
+		goals = new char[rows][columns];
 
 		this.parent = parent;
 		if ( parent == null ) {
@@ -65,8 +76,8 @@ public class Node {
 	}
 
 	public boolean isGoalState() {
-		for ( int row = 1; row < MAX_ROW - 1; row++ ) {
-			for ( int col = 1; col < MAX_COLUMN - 1; col++ ) {
+		for ( int row = 1; row < rows - 1; row++ ) {
+			for ( int col = 1; col < columns - 1; col++ ) {
 				char g = goals[row][col];
 				char b = Character.toLowerCase( boxes[row][col] );
 				if ( g > 0 && b != g) {
@@ -148,13 +159,13 @@ public class Node {
 	}
 
 	private Node ChildNode() {
-		// Node copy = new Node( this );
-		// for ( int row = 0; row < MAX_ROW; row++ ) {
-		// 	System.arraycopy( this.walls[row], 0, copy.walls[row], 0, MAX_COLUMN );
-		// 	System.arraycopy( this.boxes[row], 0, copy.boxes[row], 0, MAX_COLUMN );
-		// 	System.arraycopy( this.goals[row], 0, copy.goals[row], 0, MAX_COLUMN );
-		// }
-		return this;//copy;
+		Node copy = new Node( this, rows, columns );
+		for ( int row = 0; row < rows; row++ ) {
+			System.arraycopy( this.walls[row], 0, copy.walls[row], 0, rows );
+			System.arraycopy( this.boxes[row], 0, copy.boxes[row], 0, rows );
+			System.arraycopy( this.goals[row], 0, copy.goals[row], 0, rows );
+		}
+		return copy;
 	}
 
 	public LinkedList< Node > extractPlan() {
@@ -204,11 +215,11 @@ public class Node {
 
 	public String toString() {
 		StringBuilder s = new StringBuilder();
-		for ( int row = 0; row < MAX_ROW; row++ ) {
+		for ( int row = 0; row < rows; row++ ) {
 			if ( !this.walls[row][0] ) {
 				break;
 			}
-			for ( int col = 0; col < MAX_COLUMN; col++ ) {
+			for ( int col = 0; col < columns; col++ ) {
 				if ( this.boxes[row][col] > 0 ) {
 					s.append( this.boxes[row][col] );
 				} else if ( this.goals[row][col] > 0 ) {

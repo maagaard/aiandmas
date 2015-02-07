@@ -52,7 +52,7 @@ public class SearchClient {
 
 	public SearchClient( BufferedReader serverMessages ) throws Exception {
 		Map< Character, String > colors = new HashMap< Character, String >();
-		String line, color;
+		String line, color = "";
 
 		int agentCol = -1, agentRow = -1;
 		int colorLines = 0, levelLines = 0;
@@ -72,8 +72,10 @@ public class SearchClient {
 		if ( colorLines > 0 ) {
 			error( "Box colors not supported" );
 		}
-		
-		initialState = new Node(null);
+
+		int levelColumns = line.length();
+
+		initialState = new Node(null, levelColumns, levelColumns);
 
 		while ( !line.equals( "" ) ) {
 			for ( int i = 0; i < line.length(); i++ ) {
@@ -150,7 +152,7 @@ public class SearchClient {
 		strategy = new StrategyDFS();
 		
 		// Ex 3:
-		//strategy = new StrategyBestFirst( new AStar( client.initialState ) );
+//		strategy = new StrategyBestFirst( new AStar( client.initialState ) );
 		//strategy = new StrategyBestFirst( new WeightedAStar( client.initialState ) );
 		//strategy = new StrategyBestFirst( new Greedy( client.initialState ) );
 

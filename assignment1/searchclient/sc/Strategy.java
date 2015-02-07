@@ -1,7 +1,6 @@
 package sc;
 
-import java.util.ArrayDeque;
-import java.util.HashSet;
+import java.util.*;
 
 import sc.SearchClient.Memory;
 
@@ -118,33 +117,83 @@ public abstract class Strategy {
 	// Ex 3: Best-first Search uses a priority queue (Java contains no implementation of a Heap data structure)
 	public static class StrategyBestFirst extends Strategy {
 		private Heuristic heuristic;
+
+		private List<Node> frontier;
+//		private HashMap<Node, Integer> cost = new HashMap<Node, Integer>();
+
 		public StrategyBestFirst( Heuristic h ) {
 			super();
 			heuristic = h;
+//			frontier = new ArrayDeque<Node>();
+            frontier = new ArrayList<Node>();
+
 			// Unimplemented
 		}
 		public Node getAndRemoveLeaf() {
 			// Unimplemented
-			return null;
+//            List<Integer> distance = new ArrayList<Integer>();
+
+//			for (Node node : frontier) {
+//				distance.add(heuristic.f(node));
+//                cost.put(node, heuristic.f(node));
+//
+//                heuristic.compare(node, )
+//
+//			}
+//            for (Integer distance : cost.values()) {
+//
+//            }
+
+            //frontier.pop();
+
+            Node bestNode = frontier.get(0);
+            frontier.remove(0);
+			return bestNode;
 		}
 
 		public void addToFrontier( Node n ) {
 			// Unimplemented
+
+            int comparison;
+            for (Node node : frontier) {
+                comparison = heuristic.compare(n, node);
+                if (comparison <= 0) {
+                    frontier.add(frontier.indexOf(node), n);
+                    return;
+                }
+            }
+            frontier.add(n);
+
+//            if (frontier.size() == 0) {
+//                frontier.add(n);
+//            } else {
+//                int comparison;
+//
+//                for (Node node : frontier) {
+//                    comparison = heuristic.compare(n, node);
+//                    if (comparison <= 0) {
+//                        frontier.add(frontier.indexOf(node), n);
+//                        return;
+//                    }
+//                }
+//                frontier.add(n);
+//                frontier.push(n);
+//                cost.put(n, heuristic.f(n));
+//            }
+
 		}
 
 		public int countFrontier() {
-			// Unimplemented
+			frontier.size();
 			return 0;
 		}
 
 		public boolean frontierIsEmpty() {
-			// Unimplemented
-			return true;
+			return frontier.isEmpty();
 		}
 
 		public boolean inFrontier( Node n ) {
-			// Unimplemented
-			return false;
+			return frontier.contains(n);
 		}
 
 		public String toString() {
