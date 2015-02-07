@@ -5,17 +5,35 @@ import java.util.Comparator;
 public abstract class Heuristic implements Comparator< Node > {
 
 	public Node initialState;
+    public int goalRow, goalColumn;
 	public Heuristic(Node initialState) {
 		this.initialState = initialState;
 
         char[][] goals = initialState.goals;
 
-        for (char[] row : goals) {
-            for (char chr : row) {
-                System.err.println("Goal?: " + chr);
+//        int x, y = 0;
 
+        for (int i = 0; i < goals.length; i++) {
+            for (int j = 0; j < goals.length; j++) {
+                if (goals[i][j] != 0) {
+//                    x = i;
+//                    y = j;
+                    //break;
+                    goalRow = i;
+                    goalColumn = j;
+                }
             }
         }
+
+
+//        for (char[] row : goals) {
+//            for (char chr : row) {
+//                System.err.println("Goal?: " + chr);
+//                if (chr != 0) {
+//
+//                }
+//            }
+//        }
 //        System.err.println("Goals: " + goals.);
 
 	}
@@ -26,8 +44,11 @@ public abstract class Heuristic implements Comparator< Node > {
 
 	public int h( Node n ) {
 
-
-		return 0;
+        double a = Math.pow(n.agentCol-goalColumn, 2);
+        double b = Math.pow(n.agentRow-goalRow, 2);
+        double distance = Math.sqrt(a+b);
+//        System.err.println("a: "+a+ " b: "+b + " c: " + distance);
+		return (int)distance;
 	}
 
 	public abstract int f( Node n );
@@ -38,6 +59,7 @@ public abstract class Heuristic implements Comparator< Node > {
 		}
 
 		public int f( Node n ) {
+//            System.err.println("g: "+n.g()+ " h: "+h(n));
 			return n.g() + h( n );
 		}
 

@@ -123,22 +123,22 @@ public class Node {
 			} else if ( c.actType == type.Pull ) {
 				// Cell is free where agent is going
 				if ( cellIsFree( newAgentRow, newAgentCol ) ) {
-					int boxRow = this.agentRow + dirToRowChange( c.dir2 );
-					int boxCol = this.agentCol + dirToColChange( c.dir2 );
-					// .. and there's a box in "dir2" of the agent
-					if ( boxAt( boxRow, boxCol ) ) {
-						Node n = this.ChildNode();
-						n.action = c;
-						n.agentRow = newAgentRow;
-						n.agentCol = newAgentCol;
-						n.boxes[this.agentRow][this.agentCol] = this.boxes[boxRow][boxCol];
-						n.boxes[boxRow][boxCol] = 0;
-						expandedNodes.add( n );
-					}
-				}
+                    int boxRow = this.agentRow + dirToRowChange(c.dir2);
+                    int boxCol = this.agentCol + dirToColChange(c.dir2);
+                    // .. and there's a box in "dir2" of the agent
+                    if (boxAt(boxRow, boxCol)) {
+                        Node n = this.ChildNode();
+                        n.action = c;
+                        n.agentRow = newAgentRow;
+                        n.agentCol = newAgentCol;
+                        n.boxes[this.agentRow][this.agentCol] = this.boxes[boxRow][boxCol];
+                        n.boxes[boxRow][boxCol] = 0;
+                        expandedNodes.add(n);
+                    }
+                }
 			}
 		}
-		Collections.shuffle( expandedNodes, rnd );
+//		Collections.shuffle( expandedNodes, rnd );
 		return expandedNodes;
 	}
 

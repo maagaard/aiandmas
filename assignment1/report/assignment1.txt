@@ -95,6 +95,7 @@ The frontier is a List. When a node (the one with the lowest f(n)) is poped from
 Actually I use two frontiers. 
 
 
+b)
 
 
 
