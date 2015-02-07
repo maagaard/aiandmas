@@ -149,10 +149,10 @@ public class SearchClient {
 		Strategy strategy = null;
 		// strategy = new StrategyBFS();
 		// Ex 1:
-		strategy = new StrategyDFS();
+//		strategy = new StrategyDFS();
 		
 		// Ex 3:
-//		strategy = new StrategyBestFirst( new AStar( client.initialState ) );
+		strategy = new StrategyBestFirst( new AStar( client.initialState ) );
 		//strategy = new StrategyBestFirst( new WeightedAStar( client.initialState ) );
 		//strategy = new StrategyBestFirst( new Greedy( client.initialState ) );
 
@@ -176,6 +176,7 @@ public class SearchClient {
 					break;
 				}
 			}
+
 		}
 	}
 }

@@ -88,7 +88,7 @@ public class Node {
 		return true;
 	}
 
-	public ArrayList< Node > getExpandedNodes() {
+    public ArrayList< Node > getExpandedNodes() {
 		ArrayList< Node > expandedNodes = new ArrayList< Node >( Command.every.length );
 		for ( Command c : Command.every ) {
 			// Determine applicability of action

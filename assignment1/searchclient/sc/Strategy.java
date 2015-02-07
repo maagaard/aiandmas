@@ -119,40 +119,32 @@ public abstract class Strategy {
 		private Heuristic heuristic;
 
 		private List<Node> frontier;
-//		private HashMap<Node, Integer> cost = new HashMap<Node, Integer>();
+        private List<Node> oldFrontier;
 
 		public StrategyBestFirst( Heuristic h ) {
 			super();
 			heuristic = h;
-//			frontier = new ArrayDeque<Node>();
             frontier = new ArrayList<Node>();
-
-			// Unimplemented
+            oldFrontier = new ArrayList<Node>();
 		}
 		public Node getAndRemoveLeaf() {
-			// Unimplemented
-//            List<Integer> distance = new ArrayList<Integer>();
 
-//			for (Node node : frontier) {
-//				distance.add(heuristic.f(node));
-//                cost.put(node, heuristic.f(node));
-//
-//                heuristic.compare(node, )
-//
-//			}
-//            for (Integer distance : cost.values()) {
-//
-//            }
+            Node node;
+            if (frontier.size() == 0) {
+                node = oldFrontier.get(0);
+                oldFrontier.remove(0);
+            } else {
+                node = frontier.get(0);
+                frontier.remove(0);
 
-            //frontier.pop();
+                oldFrontier.addAll(frontier);
+                frontier.clear();
+            }
 
-            Node bestNode = frontier.get(0);
-            frontier.remove(0);
-			return bestNode;
+			return node;
 		}
 
 		public void addToFrontier( Node n ) {
-			// Unimplemented
 
             int comparison;
             for (Node node : frontier) {
@@ -163,33 +155,14 @@ public abstract class Strategy {
                 }
             }
             frontier.add(n);
-
-//            if (frontier.size() == 0) {
-//                frontier.add(n);
-//            } else {
-//                int comparison;
-//
-//                for (Node node : frontier) {
-//                    comparison = heuristic.compare(n, node);
-//                    if (comparison <= 0) {
-//                        frontier.add(frontier.indexOf(node), n);
-//                        return;
-//                    }
-//                }
-//                frontier.add(n);
-//                frontier.push(n);
-//                cost.put(n, heuristic.f(n));
-//            }
-
 		}
 
 		public int countFrontier() {
-			frontier.size();
-			return 0;
+			return frontier.size() + oldFrontier.size();
 		}
 
 		public boolean frontierIsEmpty() {
-			return frontier.isEmpty();
+			return frontier.isEmpty() && oldFrontier.isEmpty();
 		}
 
 		public boolean inFrontier( Node n ) {

@@ -7,6 +7,17 @@ public abstract class Heuristic implements Comparator< Node > {
 	public Node initialState;
 	public Heuristic(Node initialState) {
 		this.initialState = initialState;
+
+        char[][] goals = initialState.goals;
+
+        for (char[] row : goals) {
+            for (char chr : row) {
+                System.err.println("Goal?: " + chr);
+
+            }
+        }
+//        System.err.println("Goals: " + goals.);
+
 	}
 
 	public int compare( Node n1, Node n2 ) {
@@ -14,6 +25,8 @@ public abstract class Heuristic implements Comparator< Node > {
 	}
 
 	public int h( Node n ) {
+
+
 		return 0;
 	}
 
