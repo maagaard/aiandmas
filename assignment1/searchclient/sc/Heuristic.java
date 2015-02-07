@@ -11,31 +11,14 @@ public abstract class Heuristic implements Comparator< Node > {
 
         char[][] goals = initialState.goals;
 
-//        int x, y = 0;
-
         for (int i = 0; i < goals.length; i++) {
             for (int j = 0; j < goals.length; j++) {
                 if (goals[i][j] != 0) {
-//                    x = i;
-//                    y = j;
-                    //break;
                     goalRow = i;
                     goalColumn = j;
                 }
             }
         }
-
-
-//        for (char[] row : goals) {
-//            for (char chr : row) {
-//                System.err.println("Goal?: " + chr);
-//                if (chr != 0) {
-//
-//                }
-//            }
-//        }
-//        System.err.println("Goals: " + goals.);
-
 	}
 
 	public int compare( Node n1, Node n2 ) {
