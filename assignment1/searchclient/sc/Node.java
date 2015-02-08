@@ -12,9 +12,10 @@ import sc.Command.type;
 
 public class Node {
 
-	private static Random rnd = new Random( 1 ); 
-//	public static int MAX_ROW = 25;
-//	public static int MAX_COLUMN = 25;
+	private static Random rnd = new Random( 1 );
+
+	public static int MAX_ROW = 25;     //Default setting
+	public static int MAX_COLUMN = 25;  //Default setting
 
 	public int agentRow;
 	public int agentCol;
@@ -38,9 +39,6 @@ public class Node {
 
 	private int g;
 
-	private int rows;
-	private int columns;
-
 	// public Node( Node parent ) {
 	// 	this.parent = parent;
 	// 	if ( parent == null ) {
@@ -52,8 +50,8 @@ public class Node {
 
 	public Node(Node parent, int rows, int columns) {
 
-		this.rows = rows;
-		this.columns = columns;
+        MAX_ROW = rows;
+        MAX_COLUMN = columns;
 
         walls = new boolean[rows][columns];
 		boxes = new char[rows][columns];
@@ -64,6 +62,8 @@ public class Node {
 			g = 0;
 		} else {
 			g = parent.g() + 1;
+            walls = parent.walls;
+            goals = parent.goals;
 		}
 	}
 
@@ -76,8 +76,8 @@ public class Node {
 	}
 
 	public boolean isGoalState() {
-		for ( int row = 1; row < rows - 1; row++ ) {
-			for ( int col = 1; col < columns - 1; col++ ) {
+		for ( int row = 1; row < MAX_ROW - 1; row++ ) {
+			for ( int col = 1; col < MAX_COLUMN - 1; col++ ) {
 				char g = goals[row][col];
 				char b = Character.toLowerCase( boxes[row][col] );
 				if ( g > 0 && b != g) {
@@ -159,11 +159,11 @@ public class Node {
 	}
 
 	private Node ChildNode() {
-		Node copy = new Node( this, rows, columns );
-		for ( int row = 0; row < rows; row++ ) {
-			System.arraycopy( this.walls[row], 0, copy.walls[row], 0, rows );
-			System.arraycopy( this.boxes[row], 0, copy.boxes[row], 0, rows );
-			System.arraycopy( this.goals[row], 0, copy.goals[row], 0, rows );
+		Node copy = new Node( this, MAX_ROW, MAX_COLUMN);
+		for ( int row = 0; row < MAX_ROW; row++ ) {
+			System.arraycopy( this.boxes[row], 0, copy.boxes[row], 0, MAX_ROW);
+//			System.arraycopy( this.walls[row], 0, copy.walls[row], 0, rows );
+//			System.arraycopy( this.goals[row], 0, copy.goals[row], 0, rows );
 		}
 		return copy;
 	}
@@ -215,11 +215,11 @@ public class Node {
 
 	public String toString() {
 		StringBuilder s = new StringBuilder();
-		for ( int row = 0; row < rows; row++ ) {
+		for ( int row = 0; row < MAX_ROW; row++ ) {
 			if ( !this.walls[row][0] ) {
 				break;
 			}
-			for ( int col = 0; col < columns; col++ ) {
+			for ( int col = 0; col < MAX_COLUMN; col++ ) {
 				if ( this.boxes[row][col] > 0 ) {
 					s.append( this.boxes[row][col] );
 				} else if ( this.goals[row][col] > 0 ) {

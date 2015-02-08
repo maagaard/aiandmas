@@ -96,6 +96,19 @@ Actually I use two frontiers.
 
 
 b)
+Heuristic function
+The heuristic functions functions calculates the distance from the agent to the goal. The goal coordinates are found in the pre-processing.
+
+
+c) 
+Admissibility:
+
+
+d) Competition levels:
+
+
+
+
 
 
 
