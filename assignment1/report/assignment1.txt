@@ -31,6 +31,8 @@ Quite a few nodes have been explored.
 
 
 
+!!!!!!!!! Benchmark again !!!!!
+
 c)
 Implementing StrategyDFS using the same ArrayDeque - but now 
 Benchmark:
@@ -51,7 +53,7 @@ success
 
 d) 
 
-Benchmark - custom:
+Benchmark - custom: 
 
 <From Client> Summary for Depth-first Search
 <From Client> Found solution of length 45
@@ -78,6 +80,7 @@ a)
 2) The number of columns are used when instantiating the node
 Benchmark:
 
+
 b) "The locations of boxes in a level are not static. Explain which data structure would allow you to save memory in most levels, while still offering good performance when it comes to lookup. In terms of running time, what would the impact of such a modification be on isGoalState() and getExpandedNodes()"
 
 ???
@@ -97,13 +100,22 @@ Actually I use two frontiers.
 
 b)
 Heuristic function
-The heuristic functions functions calculates the distance from the agent to the goal. The goal coordinates are found in the pre-processing.
+The heuristic functions functions calculates the distance from the agent to the box and from the box to the goal. The goal and box coordinates are found in the pre-processing.
 
 Issue when multiple of same box or goal - because it is stored in a map with character as key, where keys are unique. 
 
 
+Benchmark:
+
+
+
+
+
 c) 
 Admissibility:
+
+The heuristic function is admissible, as it calculates the Pythagorean distance between agent, box and goal without regarding any possible obstacles. 
+
 
 
 d) Competition levels:
