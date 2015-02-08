@@ -81,11 +81,11 @@ public abstract class Strategy {
 
 	public static class StrategyDFS extends Strategy {
 
-		private ArrayDeque< Node > frontier;
+		private Stack<Node> frontier;
 
 		public StrategyDFS() {
 			super();
-			frontier = new ArrayDeque<Node>();
+			frontier = new Stack<Node>();
 		}
 
 		public Node getAndRemoveLeaf() {
@@ -118,55 +118,43 @@ public abstract class Strategy {
 	public static class StrategyBestFirst extends Strategy {
 		private Heuristic heuristic;
 
-		private List<Node> frontier;
-        private List<Node> oldFrontier;
+        private PriorityQueue<Node> frontier;
+        private PriorityQueue<Node> oldFrontier;
 
 		public StrategyBestFirst( Heuristic h ) {
 			super();
 			heuristic = h;
-            frontier = new ArrayList<Node>();
-            oldFrontier = new ArrayList<Node>();
+            frontier = new PriorityQueue<Node>(11, heuristic); //11 is default initial capacity
+            oldFrontier = new PriorityQueue<Node>(11, heuristic); //11 is default initial capacity
 		}
 		public Node getAndRemoveLeaf() {
 
             Node node;
             if (frontier.size() == 0) {
-                node = oldFrontier.get(0);
-                oldFrontier.remove(0);
+                node = oldFrontier.poll();
             } else {
-                node = frontier.get(0);
-                frontier.remove(0);
+                node = frontier.poll();
 
                 oldFrontier.addAll(frontier);
                 frontier.clear();
             }
-
 			return node;
 		}
 
 		public void addToFrontier( Node n ) {
-
-            int comparison;
-            for (Node node : frontier) {
-                comparison = heuristic.compare(n, node);
-                if (comparison <= 0) {
-                    frontier.add(frontier.indexOf(node), n);
-                    return;
-                }
-            }
             frontier.add(n);
 		}
 
 		public int countFrontier() {
-			return frontier.size() + oldFrontier.size();
+            return frontier.size() + oldFrontier.size();
 		}
 
 		public boolean frontierIsEmpty() {
-			return frontier.isEmpty() && oldFrontier.isEmpty();
+            return frontier.isEmpty() && oldFrontier.isEmpty();
 		}
 
 		public boolean inFrontier( Node n ) {
-			return frontier.contains(n);
+            return frontier.contains(n);
 		}
 
 		public String toString() {

@@ -102,6 +102,7 @@ public abstract class Heuristic implements Comparator< Node > {
         return combinedDistances.get(0);
     }
 
+
 	public int h(Node n) {
 
         double a = Math.pow(n.agentCol-goalColumn, 2);
