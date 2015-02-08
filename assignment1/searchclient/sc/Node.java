@@ -39,27 +39,18 @@ public class Node {
 
 	private int g;
 
-	// public Node( Node parent ) {
-	// 	this.parent = parent;
-	// 	if ( parent == null ) {
-	// 		g = 0;
-	// 	} else {
-	// 		g = parent.g() + 1;
-	// 	}
-	// }
-
 	public Node(Node parent, int rows, int columns) {
 
         MAX_ROW = rows;
         MAX_COLUMN = columns;
 
-        walls = new boolean[rows][columns];
 		boxes = new char[rows][columns];
-		goals = new char[rows][columns];
 
 		this.parent = parent;
 		if ( parent == null ) {
 			g = 0;
+            goals = new char[rows][columns];
+            walls = new boolean[rows][columns];
 		} else {
 			g = parent.g() + 1;
             walls = parent.walls;
@@ -161,9 +152,7 @@ public class Node {
 	private Node ChildNode() {
 		Node copy = new Node( this, MAX_ROW, MAX_COLUMN);
 		for ( int row = 0; row < MAX_ROW; row++ ) {
-			System.arraycopy( this.boxes[row], 0, copy.boxes[row], 0, MAX_ROW);
-//			System.arraycopy( this.walls[row], 0, copy.walls[row], 0, rows );
-//			System.arraycopy( this.goals[row], 0, copy.goals[row], 0, rows );
+			System.arraycopy( this.boxes[row], 0, copy.boxes[row], 0, MAX_COLUMN);
 		}
 		return copy;
 	}

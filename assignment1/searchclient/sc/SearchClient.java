@@ -3,10 +3,7 @@ package sc;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 
 import sc.Heuristic.*;
 import sc.Strategy.*;
@@ -73,30 +70,56 @@ public class SearchClient {
 			error( "Box colors not supported" );
 		}
 
-		int levelColumns = line.length();
 
-		initialState = new Node(null, levelColumns, levelColumns);
+        int MAX_SIZE = 100;
 
-		while ( !line.equals( "" ) ) {
-			for ( int i = 0; i < line.length(); i++ ) {
-				char chr = line.charAt( i );
-				if ( '+' == chr ) { // Walls
-					initialState.walls[levelLines][i] = true;
-				} else if ( '0' <= chr && chr <= '9' ) { // Agents
-					if ( agentCol != -1 || agentRow != -1 ) {
-						error( "Not a single agent level" );
-					}
-					initialState.agentRow = levelLines;
-					initialState.agentCol = i;
-				} else if ( 'A' <= chr && chr <= 'Z' ) { // Boxes
-					initialState.boxes[levelLines][i] = chr;
-				} else if ( 'a' <= chr && chr <= 'z' ) { // Goal cells
-					initialState.goals[levelLines][i] = chr;
-				}
-			}
-			line = serverMessages.readLine();
-			levelLines++;
-		}
+        boolean[][] walls = new boolean[MAX_SIZE][MAX_SIZE];
+        char[][] boxes = new char[MAX_SIZE][MAX_SIZE];
+        char[][] goals = new char[MAX_SIZE][MAX_SIZE];
+        int initialAgentRow = 0;
+        int initialAgentCol = 0;
+        int longestLine = 0;
+
+        while ( !line.equals( "" ) ) {
+            int length = line.length();
+            if(length > longestLine) longestLine = length;
+
+            for ( int i = 0; i < length; i++ ) {
+                char chr = line.charAt( i );
+                if ( '+' == chr ) { // Walls
+                    walls[levelLines][i] = true;
+                } else if ( '0' <= chr && chr <= '9' ) { // Agents
+                    if ( agentCol != -1 || agentRow != -1 ) {
+                        error( "Not a single agent level" );
+                    }
+                    initialAgentRow = levelLines;
+                    initialAgentCol = i;
+                } else if ( 'A' <= chr && chr <= 'Z' ) { // Boxes
+                    boxes[levelLines][i] = chr;
+                } else if ( 'a' <= chr && chr <= 'z' ) { // Goal cells
+                    goals[levelLines][i] = chr;
+                }
+            }
+            line = serverMessages.readLine();
+            levelLines++;
+        }
+
+        //Initialize new agent
+        initialState = new Node(null, levelLines +1, longestLine+1);
+
+        System.err.format("Column size: %d, row size: %d\n", Node.MAX_COLUMN, Node.MAX_ROW);
+        //Copy walls, boxes and goals into smaller array
+        for(int i = 0; i < Node.MAX_ROW; ++i) {
+            for (int j = 0; j < Node.MAX_COLUMN ; j++) {
+                initialState.walls[i][j] = walls[i][j];
+                initialState.goals[i][j] = goals[i][j];
+                initialState.boxes[i][j] = boxes[i][j];
+            }
+        }
+
+        initialState.agentCol = initialAgentCol;
+        initialState.agentRow = initialAgentRow;
+
 	}
 
 	public LinkedList< Node > Search( Strategy strategy ) throws IOException {

@@ -15,7 +15,7 @@ public abstract class Heuristic implements Comparator< Node > {
 		this.initialState = initialState;
 
         for (int i = 0; i < initialState.goals.length; i++) {
-            for (int j = 0; j < initialState.goals.length; j++) {
+            for (int j = 0; j < initialState.goals[i].length; j++) {
                 if (initialState.goals[i][j] != 0) {
 
                     //Simple
@@ -28,7 +28,7 @@ public abstract class Heuristic implements Comparator< Node > {
             }
         }
         for (int i = 0; i < initialState.boxes.length; i++) {
-            for (int j = 0; j < initialState.boxes.length; j++) {
+            for (int j = 0; j < initialState.boxes[i].length; j++) {
                 if (initialState.boxes[i][j] != 0) {
                     boxMap.put(initialState.boxes[i][j], new int[]{i, j});
                 }
