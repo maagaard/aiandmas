@@ -99,6 +99,8 @@ b)
 Heuristic function
 The heuristic functions functions calculates the distance from the agent to the goal. The goal coordinates are found in the pre-processing.
 
+Issue when multiple of same box or goal - because it is stored in a map with character as key, where keys are unique. 
+
 
 c) 
 Admissibility:

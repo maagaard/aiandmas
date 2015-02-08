@@ -23,18 +23,17 @@ public abstract class Heuristic implements Comparator< Node > {
                     goalColumn = j;
 
                     //Advanced
-                    goalMap.put(initialState.goals[i][j], new int[]{i, j});
+                    goalMap.put(Character.toLowerCase(initialState.goals[i][j]), new int[]{i, j});
                 }
             }
         }
         for (int i = 0; i < initialState.boxes.length; i++) {
             for (int j = 0; j < initialState.boxes[i].length; j++) {
                 if (initialState.boxes[i][j] != 0) {
-                    boxMap.put(initialState.boxes[i][j], new int[]{i, j});
+                    boxMap.put(Character.toLowerCase(initialState.boxes[i][j]), new int[]{i, j});
                 }
             }
         }
-
 	}
 
 	public int compare( Node n1, Node n2 ) {
@@ -42,7 +41,7 @@ public abstract class Heuristic implements Comparator< Node > {
 	}
 
 
-    public int h2(Node n) {
+    public int h3(Node n) {
         ArrayList<Integer> combinedDistances = new ArrayList<Integer>();
 //        Map<Character, Integer> combinedDistances = new HashMap<Character, Integer>();
 
@@ -80,6 +79,29 @@ public abstract class Heuristic implements Comparator< Node > {
         return combinedDistances.get(0);
     }
 
+
+
+    public int h2(Node n) {
+        ArrayList<Integer> combinedDistances = new ArrayList<Integer>();
+
+        Map<Character, Integer> boxDistances = new HashMap<Character, Integer>();
+        for (Character c : boxMap.keySet()) {
+            double a = Math.pow(n.agentRow-boxMap.get(c)[0], 2);
+            double b = Math.pow(n.agentCol-boxMap.get(c)[1], 2);
+            int agentBoxDistance = (int) Math.sqrt(a+b);
+
+            a = Math.pow(boxMap.get(c)[0] - goalMap.get(c)[0], 2);
+            b = Math.pow(boxMap.get(c)[1] - goalMap.get(c)[1], 2);
+            int boxGoalDistance = (int) Math.sqrt(a+b);
+
+            combinedDistances.add(agentBoxDistance+boxGoalDistance);
+        }
+
+//        System.err.println("Distance" + combinedDistances);
+        Collections.sort(combinedDistances);
+        return combinedDistances.get(0);
+    }
+
 	public int h(Node n) {
 
         double a = Math.pow(n.agentCol-goalColumn, 2);
@@ -96,9 +118,9 @@ public abstract class Heuristic implements Comparator< Node > {
 			super( initialState );
 		}
 
-		public int f( Node n ) {
+		public int f(Node n) {
 //            System.err.println("g: "+n.g()+ " h: "+h(n));
-			return n.g() + h( n );
+			return n.g() + h2(n);
 		}
 
 		public String toString() {
