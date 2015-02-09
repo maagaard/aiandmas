@@ -12,7 +12,7 @@
 \RequirePackage{wasysym}
 \RequirePackage{latexsym}
 \RequirePackage{amssymb}
-
+\RequirePackage[table,xcdraw]{xcolor}
 
 
 %-------- Include

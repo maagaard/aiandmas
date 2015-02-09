@@ -1,40 +1,44 @@
 \documentclass[Main]{subfiles}
 \begin{document}
 
+The initial search client benchmark:
 
-
-\textbf{Benchmark}
-
-% Please add the following required packages to your document preamble:
-% \usepackage[table,xcdraw]{xcolor}
-% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
 \begin{table}[h]
 \begin{tabular}{llllll}
 \rowcolor[HTML]{EFEFEF} 
 \textbf{Level} & \textbf{Client} & \textbf{Time} & \textbf{Memory used} & \textbf{Solution length} & \textbf{Nodes explored} \\
 SAD1           & BFS             & 0.07 s        & 11.52 MB             & 19                       & 78                      \\
 SAD1           & DFS             & 0.05 s        & 8.96 MB              & 27                       & 44                      \\
-SAD2           & BFS             & DNF           & DNF                  & DNF                      & DNF                     \\
+SAD2           & BFS             & -           & -                  & -                      & -                     \\
 SAD2           & DFS             & 4.57 s        & 509.2 MB             & 5781                     & 6799                    \\
-custom         & BFS             & DNF           & DNF                  & DNF                      & DNF                     \\
+custom         & BFS             & -           & -                  & -                      & -                     \\
 custom         & DFS             & 0.06 s        & 11.52 MB             & 45                       & 60                     
 \end{tabular}
 \end{table}
 
 
-
-It can seem like there are many more solutions, because of the now 4 A's, and not just one. However, only one of the A's can be pushed into the goal due to the ``Sobako ??????'' rule.
-- So even with 8GB of RAM allocated it is not possible. 
-
-Quite a few nodes have been explored.
+\textbf{SAD2 with BFS} 
+It can seem like there are many more solutions, because the SAD2 level has 4 A's, and not just one. The BFS therefore have many more possible states to explore, which results in no solution to be found in the limited time or with the limited memory. This search was done with 8GB of RAM allocated for the SearchClient.
 
 
 
+\textbf{DFS search strategy}
+The DFS client is implemented using a java.Util.Stack as the frontier. 
 
 
-Level:
+\textbf{Custom level}
+
 The custom designed level is a derivation of SAD2, where some of the possible spaces are filled to limit the possible movements. The possible A's are also moved a little bit. 
 
+\begin{verbatim}
++++++++++++++++++++
++0A    +++        +
++ A            ++++
++ A    + +        +
++              ++A+
++++++         +++a+
++++++++++++++++++++
+\end{verbatim}
 
 
 \end{document}
