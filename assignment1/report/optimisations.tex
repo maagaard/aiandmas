@@ -3,22 +3,18 @@
 
 
 \textbf{Optimising memory use}
-The excessive memory use is rectified by creating temporary 2d-char-arrays to contain the level walls, boxes and goals, so the actual required size is known before the Node is created. The required size of the arrays are set in the Node constructor. 
 
-The walls and goals of the ChildNode are just set to the walls and goals of the parent Node, which is perfectly fine as they are static. 
+The excessive memory use is rectified by creating temporary 2d-char-arrays to contain the level walls, boxes and goals, so the actual required size is known before the Node is created. The required size of the arrays are set in the Node constructor. By doing this only the needed amount of memory is allocated. 
 
-Regarding the boxes 
+The walls and goals of the ChildNode are just set to the walls and goals of the parent Node, instead of calling System.arrayCopy, which is perfectly fine as they are static. 
 
-Optimising the memory use when regarding boxes
-
-
-
-..... Something about the box structure not being fitting for the case, since there are very few boxes compared to the possible large 2-dimensional arrays they are stored in.  ......
+Regarding the boxes, the structure used is not very suitable for the case, since there are very few boxes compared to the possible large 2-dimensional arrays they are stored in. Even though the array structure has a very short look-up time, a hash map containing the coordinates of each box may provide a better solution. The hash map size would be limited to the number of boxes and also have very fast look-ups although not as fast as the array structure. 
+\\
 
 
 \textbf{Benchmark with optimisations}
 
-\begin{table}[h]
+\begin{table}[ht]
 \begin{tabular}{llllll}
 \rowcolor[HTML]{EFEFEF} 
 \textbf{Level} & \textbf{Client} & \textbf{Time} & \textbf{Memory used} & \textbf{Solution length} & \textbf{Nodes explored} \\

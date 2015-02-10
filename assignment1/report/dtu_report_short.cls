@@ -27,9 +27,9 @@
 
 %-------- Page setup
 \textwidth 16cm
-\textheight 22cm
+\textheight 24cm
 \oddsidemargin 0cm
-\topmargin -1cm
+\topmargin -2cm
 \def\x{{\bf x}}
 \def\w{{\bf w}}
 \def\squeeze{\itemsep=0pt\parskip=0pt}

@@ -1,7 +1,8 @@
 \documentclass[Main]{subfiles}
 \begin{document}
 
-The initial search client benchmark:
+
+\textbf{The initial search client benchmark}
 
 \begin{table}[h]
 \begin{tabular}{llllll}
@@ -18,13 +19,14 @@ custom         & DFS             & 0.06 s        & 11.52 MB             & 45    
 
 
 \textbf{SAD2 with BFS} 
+
 It can seem like there are many more solutions, because the SAD2 level has 4 A's, and not just one. The BFS therefore have many more possible states to explore, which results in no solution to be found in the limited time or with the limited memory. This search was done with 8GB of RAM allocated for the SearchClient.
-
-
+\\
 
 \textbf{DFS search strategy}
-The DFS client is implemented using a java.Util.Stack as the frontier. 
 
+The DFS client is implemented using a java.Util.Stack as the frontier, as the stack behavior corresponds to that of the DFS strategy. 
+\\
 
 \textbf{Custom level}
 

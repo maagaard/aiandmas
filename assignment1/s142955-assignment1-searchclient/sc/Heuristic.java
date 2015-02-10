@@ -41,46 +41,7 @@ public abstract class Heuristic implements Comparator< Node > {
 	}
 
 
-    public int h3(Node n) {
-        ArrayList<Integer> combinedDistances = new ArrayList<Integer>();
-//        Map<Character, Integer> combinedDistances = new HashMap<Character, Integer>();
-
-        Map<Character, Integer> boxDistances = new HashMap<Character, Integer>();
-        for (Character c : boxMap.keySet()) {
-            double a = Math.pow(n.agentRow-boxMap.get(c)[0], 2);
-            double b = Math.pow(n.agentCol-boxMap.get(c)[1], 2);
-            int distance = (int) Math.sqrt(a+b);
-//            boxDistances.add(distance);
-            boxDistances.put(c, distance);
-//            System.err.println("a: "+a+ " b: "+b + " c: " + distance);
-        }
-
-//        ArrayList<Integer> goalDistances = new ArrayList<Integer>();
-        Map<Character, Integer> goalDistances = new HashMap<Character, Integer>();
-        for (Character c : goalMap.keySet()) {
-            double a = Math.pow(n.agentRow-goalMap.get(c)[0], 2);
-            double b = Math.pow(n.agentCol-goalMap.get(c)[1], 2);
-            int distance = (int) Math.sqrt(a+b);
-            goalDistances.put(c, distance);
-//            goalDistances.add(distance);
-//            System.err.println("a: "+a+ " b: "+b + " c: " + distance);
-            combinedDistances.add(distance + boxDistances.get(Character.toUpperCase(c)));
-        }
-
-//        Collection<Integer> dists = combinedDistances.values();
-
-//        double a = Math.pow(n.agentCol-goalColumn, 2);
-//        double b = Math.pow(n.agentRow-goalRow, 2);
-//        double distance = Math.sqrt(a+b);
-
-        Collections.sort(combinedDistances);
-        System.err.println("Distance" + combinedDistances);
-//		System.err.println(dists.get(0));
-        return combinedDistances.get(0);
-    }
-
-
-
+    // HEURISTICS FUNCTION USED FOR EVALUATION
     public int h2(Node n) {
         ArrayList<Integer> combinedDistances = new ArrayList<Integer>();
 
@@ -103,6 +64,7 @@ public abstract class Heuristic implements Comparator< Node > {
     }
 
 
+    // FIRST ATTEMPT AT A HEURISTICS FUNCTION
 	public int h(Node n) {
 
         double a = Math.pow(n.agentCol-goalColumn, 2);

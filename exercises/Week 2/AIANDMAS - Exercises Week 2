@@ -1,0 +1,42 @@
+AIANDMAS - Exercises Week 2
+
+Exercise 1) (10.2 in Russel & Norvig)
+
+State: 
+At(P1, JFK) & At(P2, SFO) & Plane(P1) & Plane(P2) & Airport(JFK) & Airport(SFO)
+
+Applicable actions:
+Fly(P1, JFK, SFO)
+Fly(P2, SFO, JFK)
+
+
+
+Exercise 2) 
+
+a) 
+As in above exercise, the two symmetric move actions can be combined to:
+
+Action: Move(x, from, to)
+    Precondition: In(x, from) & Box(x) & Location(to) & Location(from)
+    Effect: In(x, to) & ¬In(x, from)
+
+b) 
+Init( In(1, a) & ....  & Location(a) & Location(b) )
+
+c) 
+In(1, a) -->
+
+
+d)
+Change in precondition:
+    Precondition: Location(to) & Location(from) & to != from
+
+e) 
+In(1,a), In(2,a), In(3,a), In(1,b), In(2,b), In(3,b)
+
+f)
+
+
+
+
+

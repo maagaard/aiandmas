@@ -2,10 +2,29 @@
 \begin{document}
 
 
-\textbf{}
+\textbf{BestFirst search strategy}
 
+The BestFirst search strategy is implemented using a java.Util.PriorityQueue as the frontier. The queue utilizes the Comparator<Node> from Heuristics to sort the queue when adding elements. 
+In order to optimize the state exploration, an extra frontier is used, oldFrontier. When a states is polled from the frontier, the rest of the states are moved to oldFrontier and frontier is cleared. The frontier is then used to store the unexplored states of the chosen node. In case of a dead end i.e. an empty frontier, an unexplored state is polled from oldFrontier. 
+\\
 
+\textbf{Heuristics function}
 
+The heuristic functions functions calculates the Pythagorean distance from the agent to the box and from the box to the goal based on the array-coordinates of each. The goal and box coordinates are found in the pre-processing. 
+As the implementation is right now, there can be and issue with multiples of same box and goal name, because it is stored in a hash map with the box and goal character as key.
+\\
+
+\textbf{Admissibility}
+
+The heuristic function is admissible, as it calculates the Pythagorean distance between agent, box and goal, without regarding any possible obstacles. This will always be the shortest distance. 
+\\
+
+\textbf{Competition levels}
+
+The SearchClient could not solve either of the competition levels. The reason for this being that the implemented algorithms doesn't take multiple and different goals and boxes into account.
+\\
+
+\textbf{Benchmark}
 
 \begin{table}[h]
 \begin{tabular}{llllll}
@@ -28,41 +47,6 @@ Crunch         & WA*                 & -           & -                  & -     
 Crunch         & Greedy              & -           & -                  & -                      & -                     
 \end{tabular}
 \end{table}
-
-
-a) ``Write a best-first search client by implementing the StrategyBestFirst class. The Heuristic argument in the constructor must be used to order nodes. As it implements the Comparator<Node> interface it integrates well with the Java Collections library. Make sure you use an appropriate data structure for the frontier, and state which one you have used.''
-
-
-The frontier is a List. When a node (the one with the lowest f(n)) is poped from the frontier, the frontier is cleared in order to make a new frontier based on the chosen node. The remaining nodes in the frontier, before clearing it, is stored as an old frontier - in order to go back to that, if the new one proves to be a dead end. 
-
-Actually I use two frontiers. 
-
-
-b)
-Heuristic function
-The heuristic functions functions calculates the distance from the agent to the box and from the box to the goal. The goal and box coordinates are found in the pre-processing.
-
-Issue when multiple of same box or goal - because it is stored in a map with character as key, where keys are unique. 
-
-
-Benchmark:
-
-
-
-
-
-c) 
-Admissibility:
-
-The heuristic function is admissible, as it calculates the Pythagorean distance between agent, box and goal without regarding any possible obstacles. 
-
-
-
-d) Competition levels:
-
-
-
-
 
 
 \end{document}
