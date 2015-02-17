@@ -31,18 +31,49 @@ f) Determine h_ip(s_0) (the ignore preconditions and non-goal literal h) for fig
     2 - since there are two goals none of which are satisfied?
 
 
-g)
+g) Example of h_ip(s_0) where h_ip(s_0) = 1 and h*(s_0) ≥ 1000:
+    Exactly the same as (d)
+
+
+h) Since h_ip(s_0) is derived from a relaxation of the problem, it is admissible and always smaller than or equal to h*
+    
+    
+i) Addition to atoms in initial state:
+    & (A=A) & (B=B) & (C=C) & (Table=Table)
+
+
+j) 
+    NotEq(x,y) is introduced.
+    Init: & NotEq(A,B) & NotEq(A,C) & NotEq(B,C)
+
+    Move:
+        Precond: & NotEq(A,B) & NotEq(A,C) & NotEq(B,C)
+
+
+k) Determine h+(s_0):
     
 
 
-h)
+l) 
+    
 
 
+m) 
+    
 
-i)
+n)
+    
 
+o)
+    
 
+p)
+    
 
+    h_add 
+    - Doesn't hit the recursion?
+
+q)
 
 
 
