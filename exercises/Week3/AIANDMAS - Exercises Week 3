@@ -6,8 +6,43 @@ Exercise 1 (Blocks world - Russen & Norvig figure 10.3)
 a) A non-interleaved planner cannot solve the are not subgoal independence
 
 
-b) h_P*(s_0) = 3?
+b) h_P*(s_0) = 3, since it takes three moves to satisfy all goals
 
 
-c) h_gc(s_0) = 
+c) h_gc(s_0) = 2, since there are two goals none of which are satisfied
+
+
+d) 
+Example of h_gc(s_0) = 1 and h*(s) ≥ 1000:
+    A thousand blocks, where 999 of them are stacked correctly, but one that should be on the top is at the bottom
+    Init( On(1, Table) & On(2, 3) & On(3, 4) & ... & On(n, 1) ) for n ≥ 1000
+    
+
+e) 
+Example of h_gc(s_0) > h*(s):
+    Init(On(A, Table), On(B, A) & ¬Clear(A))
+    Goal(On(A, Table) & On(B, Table) & Clear(A) & Clear(B))
+
+    0 B --> 0 0
+    0 A --> B A
+
+
+f) Determine h_ip(s_0) (the ignore preconditions and non-goal literal h) for fig 10.3:
+    2 - since there are two goals none of which are satisfied?
+
+
+g)
+    
+
+
+h)
+
+
+
+i)
+
+
+
+
+
 
